@@ -30,11 +30,11 @@ function displayResults(responseJson) {
   $('#results').removeClass('hidden');
 };
 
-function getParkInfo(searchTerm, maxResults){
+function getParkInfo(searchTerm, limit){
   const params = {
     api_key: apiKey,
-    q: searchTerm,
-    maxResults,
+    stateCode: searchTerm,
+    limit,
   };
   const queryString = formatQueryParams(params);
   const url = searchURL + '?' + queryString;
@@ -57,9 +57,9 @@ function getParkInfo(searchTerm, maxResults){
 function watchForm(){
   $('#js-form').submit(event => {
     event.preventDefault();
-    const searchTerm = $('#js-search-term').val();
-    const maxResults = $('#js-max-results').val();
-    getParkInfo(searchTerm, maxResults);
+    const searchTerm = $('#js-search-term').val().join(',');
+    const limit = $('#js-max-results').val();
+    getParkInfo(searchTerm, limit);
   });
 }
 
